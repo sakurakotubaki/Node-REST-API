@@ -24,12 +24,13 @@ app.post("/animals", (req, res) => {
   db.query(query, [name], (err, result) => {
     if (err) {
       console.log(err);
-      res.status(500).send("Error inserting data into database");
+      res.status(500).send({ error: "Error inserting data into database" });
     } else {
-      res.status(200).send("Value Inserted");
+      res.status(200).json({ message: "Value Inserted" });
     }
   });
 });
+
 
 // データの取得
 app.get("/animals", (req, res) => {
@@ -55,7 +56,7 @@ app.put("/animals/:id", (req, res) => {
       console.log(err);
       res.status(500).send("Error updating data in database");
     } else {
-      res.status(200).send("Value Updated");
+      res.status(200).json("Value Updated");
     }
   });
 });
@@ -70,7 +71,7 @@ app.delete("/animals/:id", (req, res) => {
       console.log(err);
       res.status(500).send("Error deleting data from database");
     } else {
-      res.status(200).send("Value Deleted");
+      res.status(200).json("Value Deleted");
     }
   });
 });
